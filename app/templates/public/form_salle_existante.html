@@ -1,0 +1,22 @@
+{% extends "public/base.html" %}
+{% block content %}
+  <h2>Formulaire – Salle existante</h2>
+  <form method="POST" action="{{ url_for('routes_existante.form_existante') }}">
+    <label>Surface piézo (m²)</label>
+    <input type="number" name="surface_piezo" required>
+
+    <label>Passages par jour</label>
+    <input type="number" name="passages_par_jour" required>
+
+    <label>Jours d'ouverture</label>
+    <input type="number" name="jours_ouverture" required>
+
+    <label>Consommation maximale (kWh)</label>
+    <input type="number" name="conso_maximale" required>
+
+    <label>Nombre d’utilisateurs estimé</label>
+    <input type="number" name="nb_utilisateurs" required>
+
+    <button type="submit">Valider</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenGym - Résumé du projet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Work Sans', 'Segoe UI', sans-serif;
+      background-image: url('/static/img/bg_greengym.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #1e3f3f;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      margin-top: 70px;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.82);
+      padding: 35px 60px;
+      max-width: 860px;
+      width: 94%;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #2d8f6f;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      color: #2d8f6f;
+      margin-top: 30px;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 20px;
+    }
+
+    li::before {
+      content: '🌿 ';
+      margin-right: 6px;
+    }
+
+    li {
+      line-height: 1.65;
+      font-size: 0.97em;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      font-size: 0.96em;
+    }
+
+    strong {
+      color: #2d8f6f;
+    }
+
+    .btn {
+      background-color: #2d8f6f;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0, 128, 96, 0.15);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #246f58;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: #e1e1e1;
+      color: #2d8f6f;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 35px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    form {
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .box {
+        padding: 30px 20px;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>📋 Résumé de votre projet</h2>
+
+    <h3>🎯 Objectifs</h3>
+    <ul>
+      {% for obj in data.objectifs %}
+        <li>{{ obj }}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>📐 Configuration spatiale</h3>
+    <ul>
+      <li>Surface totale : {{ data.surface_totale }} m²</li>
+      <li>Surface cardio : {{ data.surface_cardio }} m²</li>
+      <li>Surface pavés piézo prévue : {{ data.surface_piezo }} m²</li>
+      <li>Surface zones dynamiques estimée : {{ data.surface_dynamiques }} m²</li>
+    </ul>
+
+    <h3>👥 Fréquentation</h3>
+    <ul>
+      <li>Nombre d’adhérents : {{ data.nb_adhérents }}</li>
+      <li>Jours d’ouverture : {{ data.jours_ouverture }}</li>
+      <li>Heures/jour : {{ data.heures_ouverture }}</li>
+      <li>Cours collectifs : {{ data.cours_collectifs }}</li>
+    </ul>
+
+    {% if data.consommation_energetique %}
+    <h3>⚡ Consommation Énergétique</h3>
+    <ul>
+      <li>Consommation Énergétique Réelle : {{ data.consommation_energetique }} kWh/an</li>
+    </ul>
+    {% endif %}
+
+    <h3>🏋️‍♂️ Machines standards</h3>
+    <ul>
+      <li>Vélos générateurs : {{ data.nb_velos_generateurs }}</li>
+      <li>Elliptiques générateurs : {{ data.nb_elliptiques_generateurs }}</li>
+      <li>Tapis générateurs : {{ data.nb_tapis_generateurs }}</li>
+    </ul>
+
+    <h3>🔧 Machines personnalisées</h3>
+    <ul>
+      {% for m in data.machines_personnalisees %}
+        <li>{{ m.nom }} – {{ m.nombre }} machine(s) × {{ m.energie_par_heure }} Wh/h</li>
+      {% endfor %}
+    </ul>
+
+    <h3>💸 Tarification</h3>
+    <p><strong>Type :</strong> {{ data.type_tarif }}</p>
+
+<h3>Tarification</h3>
+<p><strong>Type :</strong> {{ data.type_tarif }}</p>
+
+    {% if data.type_tarif == "forfait" %}
+    <ul><li>Tarif annuel : {{ data.tarif_data.tarif_forfait }} {{ devise }}</li></ul>
+
+    {% elif data.type_tarif == "tranches" %}
+    <ul>
+        {% for tranche in data.tarif_data.tranches %}
+        <li>Jusqu’à {{ tranche.limite_kWh }} kWh → {{ tranche.tarif }} {{ devise }}/kWh</li>
+        {% endfor %}
+    </ul>
+
+    {% elif data.type_tarif == "heures" %}
+    <ul>
+        <li>Heures pleines : {{ data.tarif_data.tarif_heures_pleines }} {{ devise }}/kWh</li>
+        <li>Heures creuses : {{ data.tarif_data.tarif_heures_creuses }} {{ devise }}/kWh</li>
+    </ul>
+
+    {% elif data.type_tarif == "abonnement" %}
+    <ul>
+        <li>Abonnement annuel : {{ data.tarif_data.cout_abonnement_annuel }} {{ devise }}</li>
+        <li>Tarif consommation : {{ data.tarif_data.tarif_conso }} {{ devise }}/kWh</li>
+    </ul>
+    {% endif %}
+
+    <div class="actions">
+      <a href="{{ url_for('routes_nouvelle.resultats_nouvelle') }}" class="btn">Étape suivante ➡️</a>
+      <form action="{{ url_for('routes_nouvelle.generer_pdf_recapitulatif') }}" method="get">
+        <button class="btn btn-secondary">📄 Télécharger le PDF récapitulatif</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

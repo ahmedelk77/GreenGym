@@ -1,0 +1,44 @@
+{% extends 'public/base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Confirmation des informations</h2>
+    <div class="card p-4">
+        <h4>Informations de la salle</h4>
+        <ul>
+            <li><strong>Nom :</strong> {{ salle.nom }}</li>
+            <li><strong>Pays :</strong> {{ salle.pays }}</li>
+            <li><strong>Superficie (m²) :</strong> {{ salle.surface }}</li>
+            <li><strong>Consommation maximale (kWh) :</strong> {{ salle.consommation_maximale }}</li>
+            <li><strong>Devise :</strong> {{ salle.devise }}</li>
+            <li><strong>Type de tarification :</strong> {{ salle.type_tarification }}</li>
+        </ul>
+
+        {% if salle.type_tarification == 'tranches' %}
+        <h5 class="mt-3">Détails des tranches :</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>De (kWh)</th>
+                    <th>À (kWh)</th>
+                    <th>Prix (€/kWh)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tranche in salle.tranches %}
+                <tr>
+                    <td>{{ tranche.min_kwh }}</td>
+                    <td>{{ tranche.max_kwh }}</td>
+                    <td>{{ tranche.prix_kwh }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <div class="mt-4">
+            <a href="{{ url_for('ajouter_salle') }}" class="btn btn-secondary">Modifier</a>
+            <a href="{{ url_for('form_salle') }}" class="btn btn-primary">Valider et continuer</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

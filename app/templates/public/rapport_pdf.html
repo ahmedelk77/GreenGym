@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    h2 {
+      color: #333;
+    }
+    h4 {
+      margin-top: 30px;
+      color: #2d8f6f;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📊 Rapport énergétique – Profil "Nouvelle salle"</h2>
+
+  <h4>✅ Synthèse des données saisies</h4>
+  <ul>
+    <li><strong>Objectifs :</strong> {{ data.objectifs | join(", ") }}</li>
+    <li><strong>Surface totale :</strong> {{ data.surface_totale }} m²</li>
+    <li><strong>Nombre d’adhérents :</strong> {{ data.nb_adhérents }}</li>
+    <li><strong>Jours d’ouverture/semaine :</strong> {{ data.jours_ouverture }}</li>
+    <li><strong>Heures d'ouverture/jour :</strong> {{ data.heures_ouverture }}</li>
+    <li><strong>Type de tarification :</strong> {{ data.type_tarif }}</li>
+  </ul>
+
+  <h4>⚡ Énergie produite</h4>
+  <ul>
+    <li><strong>Par les dalles piézoélectriques :</strong> {{ results.energie_piezo }} kWh</li>
+    <li><strong>Par les machines génératrices :</strong> {{ results.energie_machines }} kWh</li>
+    <li><strong>Énergie totale produite :</strong> {{ results.energie_produite }} kWh ± {{ results.incertitude_production }} kWh</li>
+  </ul>
+
+  <h4>💡 Énergie consommée</h4>
+  <p><strong>{{ results.consommation_estimee }} kWh</strong> ± {{ results.incertitude_consommation }} kWh</p>
+
+  <h4>📈 Rendement énergétique</h4>
+  <p><strong>{{ results.rendement }} %</strong> ± {{ results.incertitude_rendement }} %</p>
+
+  <h4>💰 Analyse économique</h4
+    <ul>
+      <li>Théorique : {{ results.cout_annuel }} {{ devise }}</li>
+      <li>Économisé : {{ results.cout_economise }} {{ devise }}</li>
+      <li>À payer : {{ results.cout_restant }} {{ devise }}</li>
+      <li>Taux de couverture : {{ results.taux_couverture }} %</li>
+    </ul>        
+</body>
+</html>

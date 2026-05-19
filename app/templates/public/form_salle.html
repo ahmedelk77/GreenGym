@@ -1,0 +1,26 @@
+{% extends "public/base.html" %}
+{% block content %}
+  <h2>Formulaire – Nouvelle salle</h2>
+  <form method="POST" action="{{ url_for('routes_nouvelle.form_nouvelle') }}">
+    
+    <label for="surface_totale">Surface totale (m²)</label>
+    <input type="number" id="surface_totale" name="surface_totale" required>
+
+    <label for="surface_cardio">Surface cardio (m²)</label>
+    <input type="number" id="surface_cardio" name="surface_cardio" required>
+
+    <label for="surface_piezo">Surface piézo (m²)</label>
+    <input type="number" id="surface_piezo" name="surface_piezo" required>
+
+    <label for="nb_utilisateurs">Nombre d’adhérents estimé</label>
+    <input type="number" id="nb_utilisateurs" name="nb_utilisateurs" required>
+
+    <label for="heures_ouverture">Heures d'ouverture / jour</label>
+    <input type="number" id="heures_ouverture" name="heures_ouverture" required>
+
+    <label for="jours_ouverture">Jours d’ouverture / an</label>
+    <input type="number" id="jours_ouverture" name="jours_ouverture" required>
+
+    <button type="submit">Calculer</button>
+  </form>
+{% endblock %}

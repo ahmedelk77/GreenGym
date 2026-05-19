@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenGym - Machines & Énergie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Work Sans', 'Segoe UI', sans-serif;
+      background-image: url('/static/img/bg_greengym.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #1e3f3f;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      margin-top: 70px;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.82);
+      padding: 35px 60px;
+      max-width: 860px;
+      width: 94%;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+        text-align: center;
+        color: #2d8f6f;
+        margin-top: 0px;
+        margin-bottom: 30px;
+    }
+
+    h3 {
+      color: #2d8f6f;
+      margin-top: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    .btn {
+      margin-top: 30px;
+      align-self: flex-start;
+      background-color: #2d8f6f;
+      color: white;
+      padding: 12px 30px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0, 128, 96, 0.15);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #246f58;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: #eee;
+      color: purple;
+      border: 1px dashed purple;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 30px 0;
+    }
+
+    #machines_perso_container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .box {
+        padding: 30px 20px;
+      }
+
+      .inline-field {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .btn2 {
+      margin-top: 30px;
+      align-self: flex-end;
+      background-color: #2d8f6f;
+      color: white;
+      padding: 12px 30px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0, 128, 96, 0.15);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn2:hover {
+      background-color: #246f58;
+      transform: translateY(-2px);
+    }
+
+
+    
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("ajouter_machine_btn");
+      const container = document.getElementById("machines_perso_container");
+
+      btn.addEventListener("click", () => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <input type="text" name="nom_machine_perso[]" placeholder="Nom de la machine" required style="margin-right: 10px; padding: 8px; border-radius: 8px; border: 1px solid #ccc;">
+          <input type="number" name="nb_machine_perso[]" placeholder="Quantité" min="0" required style="padding: 8px; border-radius: 8px; border: 1px solid #ccc;">
+        `;
+        container.appendChild(div);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="box">
+    <h2>⚙️ Machines génératrices & Énergie</h2>
+    <form method="POST">
+      <h3>Consommation Énergétique</h3>
+      <label for="consommation_energetique">Consommation Énergétique Réelle (kWh/an) :</label>
+      <input type="number" name="consommation_energetique" min="0" required>
+
+      <h3>Machines standards</h3>
+      <label>Vélos générateurs :</label>
+      <input type="number" name="nb_velos_generateurs" min="0" required>
+
+      <label>Elliptiques générateurs :</label>
+      <input type="number" name="nb_elliptiques_generateurs" min="0" required>
+
+      <label>Tapis générateurs :</label>
+      <input type="number" name="nb_tapis_generateurs" min="0" required>
+
+      <hr>
+
+      <h3>Machines personnalisées</h3>
+      <div id="machines_perso_container" class="machine-grid-container"></div>
+      <button type="button" id="ajouter_machine_btn" class="btn btn-secondary">➕ Ajouter une machine</button>
+
+      <hr>
+      <button type="submit" class="btn2">Étape suivante ➡️</button>
+    </form>
+  </div>
+</body>
+</html>

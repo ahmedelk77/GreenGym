@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenGym - Fréquentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Work Sans', sans-serif;
+      background-image: url('/static/img/bg_greengym.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #1e3f3f;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.75);
+      padding: 50px;
+      max-width: 750px;
+      width: 92%;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: #2d8f6f;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .inline-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .inline-field label {
+      min-width: 260px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+      accent-color: #2d8f6f;
+    }
+
+    label[for="cours_collectifs"] {
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 30px;
+      align-self: flex-end;
+      background-color: #2d8f6f;
+      color: white;
+      padding: 12px 30px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0, 128, 96, 0.15);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #246f58;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .box {
+        padding: 30px 20px;
+      }
+
+      .inline-field {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      button {
+        width: 100%;
+        align-self: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>👥 Fréquentation & Horaires</h2>
+    <form method="POST">
+      <div class="inline-field">
+        <label for="nb_adhérents">Nombre d’adhérents :</label>
+        <input type="number" name="nb_adhérents" required>
+      </div>
+
+      <div class="inline-field">
+        <label for="jours_ouverture">Jours d’ouverture par semaine :</label>
+        <input type="number" name="jours_ouverture" min="1" max="7" required>
+      </div>
+
+      <div class="inline-field">
+        <label for="heures_ouverture">Heures d’ouverture par jour :</label>
+        <input type="number" name="heures_ouverture" min="1" max="24" required>
+      </div>
+
+      <label for="cours_collectifs">Cours collectifs prévus ?</label>
+      <div>
+        <input type="radio" name="cours_collectifs" value="oui"> Oui
+        <input type="radio" name="cours_collectifs" value="non" checked> Non
+      </div>
+
+      <button type="submit">Étape suivante ➡️</button>
+    </form>
+  </div>
+</body>
+</html>

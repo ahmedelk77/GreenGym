@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résumé du projet - PDF</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    h2, h3 { color: #333; }
+    ul { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+<h2>📄 Résumé de votre projet - Profil "Salle existante"</h2>
+
+<h3>🎯 Objectifs</h3>
+<ul>
+  {% for obj in data.objectifs %}
+    <li>{{ obj }}</li>
+  {% endfor %}
+</ul>
+
+<h3>🏠 Configuration spatiale</h3>
+<ul>
+  <li>Surface totale : {{ data.surface_totale }} m²</li>
+  <li>Surface cardio : {{ data.surface_cardio }} m²</li>
+  <li>Surface piézo : {{ data.surface_piezo }} m²</li>
+  <li>Zones dynamiques : {{ data.surface_dynamiques }} m²</li>
+</ul>
+
+<h3>👥 Fréquentation</h3>
+<ul>
+  <li>Nombre d’adhérents : {{ data.nb_adhérents }}</li>
+  <li>Jours d’ouverture : {{ data.jours_ouverture }}</li>
+  <li>Heures/jour : {{ data.heures_ouverture }}</li>
+  <li>Cours collectifs : {{ data.cours_collectifs }}</li>
+</ul>
+
+<h3>⚙️ Machines standards</h3>
+<ul>
+  <li>Vélos générateurs : {{ data.nb_velos_generateurs }}</li>
+  <li>Elliptiques générateurs : {{ data.nb_elliptiques_generateurs }}</li>
+  <li>Tapis générateurs : {{ data.nb_tapis_generateurs }}</li>
+</ul>
+
+<h3>🔧 Machines personnalisées</h3>
+<ul>
+  {% for m in data.machines_personnalisees %}
+    <li>{{ m.nom }} – {{ m.nombre }} × {{ m.energie_par_heure }} Wh/h</li>
+  {% endfor %}
+</ul>
+
+<h3>💡 Consommation Énergétique Réelle</h3>
+<ul>
+  <li>{{ data.consommation_energetique }} kWh/an</li>
+</ul>
+
+<h3>💰 Tarification électrique</h3>
+<p><strong>Type :</strong> {{ data.type_tarif }}</p>
+
+{% if data.type_tarif == "forfait" %}
+  <ul><li>Tarif annuel : {{ data.tarif_data.tarif_forfait }} {{ devise }}</li></ul>
+
+{% elif data.type_tarif == "tranches" %}
+  <ul>
+    {% for tranche in data.tarif_data.tranches %}
+      <li>Jusqu’à {{ tranche.limite_kWh }} kWh → {{ tranche.tarif }} {{ devise }}/kWh</li>
+    {% endfor %}
+  </ul>
+
+{% elif data.type_tarif == "heures" %}
+  <ul>
+    <li>Heures pleines : {{ data.tarif_data.tarif_heures_pleines }} {{ devise }}/kWh</li>
+    <li>Heures creuses : {{ data.tarif_data.tarif_heures_creuses }} {{ devise }}/kWh</li>
+  </ul>
+
+{% elif data.type_tarif == "abonnement" %}
+  <ul>
+    <li>Abonnement annuel : {{ data.tarif_data.cout_abonnement_annuel }} {{ devise }}</li>
+    <li>Tarif consommation : {{ data.tarif_data.tarif_conso }} {{ devise }}/kWh</li>
+  </ul>
+{% endif %}
+
+</body>
+</html>

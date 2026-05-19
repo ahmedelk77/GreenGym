@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenGym - Résultats finaux</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Work Sans', 'Segoe UI', sans-serif;
+      background-image: url('/static/img/bg_greengym.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #1e3f3f;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      margin-top: 70px;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.82);
+      padding: 35px 60px;
+      max-width: 860px;
+      width: 94%;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #2d8f6f;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      color: #2d8f6f;
+      margin-top: 30px;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 20px;
+    }
+
+    li::before {
+      content: '🌿 ';
+      margin-right: 6px;
+    }
+
+    li {
+      line-height: 1.65;
+      font-size: 0.97em;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      font-size: 0.96em;
+    }
+
+    strong {
+      color: #2d8f6f;
+    }
+
+    .btn {
+      background-color: #2d8f6f;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0, 128, 96, 0.15);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #246f58;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: #e1e1e1;
+      color: #2d8f6f;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 35px;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    form {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>📊 Résultats finaux – Profil "{{ profil|capitalize }}"</h2>
+
+    <h3>📋 Synthèse des données saisies</h3>
+    <ul>
+      <li><strong>Surface totale :</strong> {{ data.surface_totale }} m²</li>
+      <li><strong>Nombre d’adhérents :</strong> {{ data.nb_adhérents }}</li>
+      <li><strong>Jours d’ouverture :</strong> {{ data.jours_ouverture }}</li>
+      <li><strong>Heures d’ouverture :</strong> {{ data.heures_ouverture }}</li>
+      <li><strong>Type de tarification :</strong> {{ data.type_tarif }}</li>
+    </ul>
+
+    <h3>⚡ Énergie produite</h3>
+    <ul>
+      <li><strong>Par les dalles piézo :</strong> {{ results.energie_piezo }} kWh</li>
+      <li><strong>Par les machines génératrices :</strong> {{ results.energie_machines }} kWh</li>
+      <li><strong>Total produite :</strong> {{ results.energie_produite }} kWh ± {{ results.incertitude_production }} kWh</li>
+    </ul>
+
+    <h3>💡 Consommation estimée</h3>
+    <p><strong>{{ results.consommation_estimee }} kWh</strong> ± {{ results.incertitude_consommation }} kWh</p>
+
+    <h3>📈 Rendement énergétique</h3>
+    <p><strong>{{ results.rendement }} %</strong> ± {{ results.incertitude_rendement }} %</p>
+
+    {% if results.commentaire %}
+    <h3>💬 Suggestions personnalisées</h3>
+    <p>{{ results.commentaire }}</p>
+    {% endif %}
+
+    <h3>💰 Analyse économique</h3>
+    <ul>
+      <li><strong>Coût total théorique :</strong> {{ results.cout_annuel }} {{ devise }}</li>
+      <li><strong>Coût économisé :</strong> {{ results.cout_economise }} {{ devise }}</li>
+      <li><strong>Reste à payer :</strong> {{ results.cout_restant }} {{ devise }}</li>
+      <li><strong>Taux de couverture :</strong> {{ results.taux_couverture }} %</li>
+    </ul>
+
+    <div class="actions">
+      <a href="{{ url_for('routes_nouvelle.generer_pdf') }}" class="btn btn-secondary">
+        📄 Télécharger le rapport PDF
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenGym - Accueil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Work Sans', sans-serif;
+      background-image: url('/static/img/bg_greengym.png'); /* <-- Assure-toi de placer l'image ici */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #1e3f3f;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.72);
+      padding: 60px 60px;
+      max-width: 1180px;
+      width: 95%;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header-section h1 {
+      font-size: 2.7em;
+      color: #2d8f6f;
+      margin: 8px;
+    }
+
+    .header-section p {
+      font-size: 1.1em;
+      color: #444;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background-color: #f9fdfc;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: #f0fcf7;
+    }
+
+    .card .emoji {
+      font-size: 1.6em;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 1.15em;
+      color: #2d8f6f;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.92em;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .cta p {
+      font-size: 1.05em;
+      font-weight: bold;
+      margin-left: 70px;
+      color: #2d8f6f;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 70px;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      background-color: #2d8f6f;
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05em;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0, 128, 96, 0.15);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #246f58;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1024px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .button-container {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <!-- 🟢 Header -->
+    <div class="header-section">
+      <h1>Bienvenue sur <strong>GreenGym</strong></h1>
+      <p>Optimisez ou concevez votre salle de sport avec une approche plus durable et intelligente.</p>
+    </div>
+
+    <!-- 🟢 Objectifs -->
+    <div class="features">
+      <div class="card">
+        <div class="emoji">💡</div>
+        <h3>Estimer la consommation</h3>
+        <p>Évaluez vos besoins et votre production énergétique actuelle ou future.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">📊</div>
+        <h3>Analyser le rendement</h3>
+        <p>Visualisez le rendement global et le taux de couverture de votre salle.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">💰</div>
+        <h3>Optimiser les coûts</h3>
+        <p>Identifiez les économies potentielles en fonction de votre modèle tarifaire.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">📄</div>
+        <h3>Recevoir des conseils</h3>
+        <p>Obtenez des recommandations personnalisées selon votre profil de salle.</p>
+      </div>
+    </div>
+
+    <!-- 🟢 CTA alignée -->
+    <div class="cta">
+      <p>Commencez en choisissant votre type de salle :</p>
+      <div class="button-container">
+        <a href="{{ url_for('routes_nouvelle.form_objectif') }}?profil=nouvelle" class="btn">Nouvelle Salle</a>
+        <a href="{{ url_for('routes_existante.form_objectif2') }}?profil=existante" class="btn">Salle Existante</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

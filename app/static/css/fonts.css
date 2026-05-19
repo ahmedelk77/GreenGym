@@ -1,0 +1,98 @@
+/* Import font styles */
+@import url('fonts.css');
+
+/* Resetting and setting base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center; /* Ensures everything centers horizontally */
+    align-items: center; /* Ensures everything centers vertically */
+    min-height: 100vh; /* Minimum height to take full viewport height */
+    padding: 20px;
+}
+
+header {
+    position: absolute; /* Makes the header position independent of other elements */
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    background: #c1f7f5;
+    width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end; /* Moves the nav items to the right */
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    margin-left: auto; /* Aligns navigation to the right */
+}
+
+.container {
+    width: auto; /* Adjust width based on content */
+    max-width: 90%; /* Maximum width to maintain padding on sides */
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    margin-top: 60px; /* Space for the header */
+}
+
+table {
+    width: 100%; /* Table takes full width of its container */
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #fff;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.filters {
+    display: flex;
+    justify-content: center; /* Centers the filter inputs */
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+input, select {
+    padding: 8px;
+    margin: 0 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}

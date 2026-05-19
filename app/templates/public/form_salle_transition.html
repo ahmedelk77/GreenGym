@@ -1,0 +1,28 @@
+{% extends "public/base.html" %}
+{% block content %}
+  <h2>Formulaire – Transition / Optimisation</h2>
+  <form method="POST" action="{{ url_for('routes_transition.form_transition') }}">
+    <label>Surface totale (m²)</label>
+    <input name="surface_totale" type="number" required>
+
+    <label>Surface piézo (m²)</label>
+    <input name="surface_piezo" type="number" required>
+
+    <label>Passages par jour</label>
+    <input name="passages_par_jour" type="number" required>
+
+    <label>Heures d'ouverture par jour</label>
+    <input name="heures_ouverture" type="number" required>
+
+    <label>Jours d'ouverture</label>
+    <input name="jours_ouverture" type="number" required>
+
+    <label>Consommation réelle (kWh)</label>
+    <input name="conso_maximale" type="number" required>
+
+    <label>Nombre d’utilisateurs estimé</label>
+    <input name="nb_utilisateurs" type="number" required>
+
+    <button type="submit">Calculer</button>
+  </form>
+{% endblock %}

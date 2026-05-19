@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>GreenGym</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff5f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 192, 203, 0.2);
+  }
+
+  .title {
+    text-align: center;
+    font-size: 2.4em;
+    color: #e65c5c;
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 40px;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+    color: white;
+    background-color: #e65c5c;
+    border: none;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(230, 92, 92, 0.3);
+  }
+
+  .btn:hover {
+    background-color: #d94c4c;
+    transform: scale(1.03);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #e65c5c;
+  }
+
+  input[type="number"],
+  input[type="text"],
+  select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  button[type="submit"] {
+    align-self: flex-start;
+    padding: 12px 24px;
+    background-color: #e65c5c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(230, 92, 92, 0.3);
+  }
+
+  button[type="submit"]:hover {
+    background-color: #d94c4c;
+  }
+
+  .results-box {
+    background-color: #fff0f0;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #f0c0c0;
+    margin-top: 20px;
+  }
+
+  .inline-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .inline-field label {
+    min-width: 150px;
+  }
+
+  .inline-field input {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .grid-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .grid-2col > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 600px) {
+    .grid-2col {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
