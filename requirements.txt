@@ -6,3 +6,4 @@ pyodbc
 requests
 click
 gunicorn
+weasyprint
