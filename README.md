@@ -1,194 +1,180 @@
 
-# **Leveraging Neural Networks & Machine Learning for RANS Model Discovery**
+# GreenGym
 
-## **Project Overview**
+## Project Overview
 
-This project integrates **Sparse Identification of Non-Linear Systems (SINDy)** and **Physics-Informed Neural Networks (PINN)** to predict **Reynolds Stresses** in **Poiseuille** and **Couette** turbulent flows. The objective is to improve upon the traditional **Reynolds-Averaged Navier-Stokes (RANS)** models, particularly the **SST-kω** model, using a data-driven approach leveraging **DNS** data. The project demonstrates a significant reduction in **Root Mean Square Error (RMSE)** between **DNS** and **RANS** predictions across multiple Reynolds numbers, both in **Channel Flow** and **Couette Flow**.
+GreenGym is a data-driven web application developed with Flask and Python to analyze, estimate, and optimize energy efficiency in gyms.
 
-### Key Objectives:
-- Develop data-driven models to predict turbulent Reynolds stresses.
-- Discover governing equations using **SINDy** to inform the **PINN**.
-- Compare the **PINN** performance with **RANS** and **DNS** results, highlighting the improvements achieved.
+The application helps gym owners and project planners evaluate energy consumption, estimate renewable energy production generated through energy-generating gym machines and piezoelectric flooring systems, and analyze the economic profitability of sustainable gym infrastructures.
 
----
+The platform provides an interactive multi-step workflow allowing users to:
+- Configure gym characteristics
+- Analyze energy performance
+- Estimate energy production
+- Optimize electricity costs
+- Generate automated PDF reports
+- Receive personalized sustainability recommendations
 
-## **Repository Structure**
-
-\`\`\`bash
-Leveraging_NN_ML_for_RANS_Model_Discovery/
-│
-├── Images/                                      # Contains figures used in the project
-├── Neural Networks Codes/                       # Contains the neural network models
-│   ├── PINN/                                    # Physics-Informed Neural Network model
-│   │   ├── DNS_data/                            # DNS data used for PINN training
-│   │   ├── model_files/                         # Model files for the PINN
-│   │   ├── Result_Comparison/                   # Comparison between DNS and RANS results
-│   │   ├── results/                             # Results of the PINN model predictions
-│   │   ├── Save_models/                         # Saved models from training
-│   │   ├── Data_Preprocessing.ipynb             # Data preprocessing notebook
-│   └── Simple Neural Network/                   # A simple NN approach for RANS model prediction
-│       ├── K Optimisation/                      # Files for optimizing the K factor
-│       └── Keras Reynold Stress Tensor Predictor # Keras-based NN models
-│
-├── PySINDy Codes/                               # PySINDy code for discovering governing equations
-├── README.txt                                   # ReadMe file
-├── Report.pdf                                   # Project report
-└── Scientific_Paper.pdf                         # Related scientific paper
-\`\`\`
+GreenGym combines web development, data analytics, energy modeling, and business intelligence concepts into a single intelligent platform.
 
 ---
 
-## **System Requirements**
+## Key Features
 
-- **Operating System**: Windows, macOS, or Linux
-- **Hardware**: Minimum 8GB RAM (16GB recommended)
+- Interactive multi-step user workflow
+- Energy consumption estimation
+- Renewable energy production analysis
+- Piezoelectric flooring estimation
+- Energy-generating machine configuration
+- Dynamic electricity pricing models
+- Economic profitability analysis
+- Personalized sustainability recommendations
+- Automated PDF report generation
+- Responsive and modern UI/UX design
 
-## **Software and Tools**
+---
 
-- **Python 3.8+**
-- **Jupyter Notebook**
-- Libraries:
-  - \`numpy\`
-  - \`pandas\`
-  - \`matplotlib\`
-  - \`seaborn\`
-  - \`scipy\`
-  - \`scikit-learn\`
-  - \`tensorflow\`
-  - \`torch\`
-  - \`pysindy\`
-  - \`sympy\`
-  - \`plotly\`
+## Technologies Used
 
-Install the necessary libraries:
+### Backend
+- Python
+- Flask
+- SQLAlchemy
 
-\`\`\`bash
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Data & Analytics
+- Pandas
+- NumPy
+
+### Reporting
+- WeasyPrint
+
+---
+
+## Application Workflow
+
+1. Select the gym profile
+2. Define project objectives
+3. Configure spatial parameters
+4. Enter attendance and operating schedules
+5. Configure energy-generating machines
+6. Define electricity pricing models
+7. Review project summary
+8. Generate energy analysis and recommendations
+9. Export PDF reports
+
+---
+
+## Screenshots
+
+### Homepage
+
+![Homepage](screenshots/homepage.png)
+
+### Project Objectives
+
+![Objectives](screenshots/objectives.png)
+
+### Spatial Configuration
+
+![Spatial Configuration](screenshots/spatial_configuration.png)
+
+### Attendance & Schedules
+
+![Attendance](screenshots/attendance.png)
+
+### Energy Generation Machines
+
+![Machines](screenshots/machines.png)
+
+### Electricity Pricing
+
+![Pricing](screenshots/pricing.png)
+
+### Project Summary
+
+![Summary](screenshots/summary.png)
+
+### Final Results Dashboard
+
+![Results](screenshots/results.png)
+
+---
+
+## Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/ahmedelk77/GreenGym.git
+cd GreenGym
+```
+
+### Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### Activate the virtual environment
+
+#### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+#### Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+### Install dependencies
+
+```bash
 pip install -r requirements.txt
-\`\`\`
+```
+
+### Run the application
+
+```bash
+python run.py
+```
 
 ---
 
-## **Data Description**
+## Results & Insights
 
-The project utilizes **DNS data** for **Channel** and **Couette** flows at various **Reynolds numbers** ranging from 182 to 5200 for channels and from 93 to 543 for Couette. The data is crucial in training and validating the models.
-
-### Key Variables:
-- **Mean Velocity Fields** (U, W)
-- **Streamwise Velocity Gradients** (dU/dy)
-- **Reynolds Stresses** (u'u', v'v', w'w', u'v')
-- **Turbulent Kinetic Energy** (k)
-- **Pressure Fields** (P)
-
-<p align="center">
-  <img src="./Images/Figure1.png" alt="Raw and Interpolated DNS and RANS Data" />
-</p>
-
-Figure 1 demonstrates the mirroring and interpolation functions applied to preprocess the DNS and RANS data, necessary for model training and improving data diversity.
+The application provides:
+- Estimated annual energy consumption
+- Renewable energy production estimation
+- Energy coverage rate analysis
+- Economic savings estimation
+- Sustainability performance evaluation
+- Personalized recommendations
+- Automated PDF reporting
 
 ---
 
-## **Modeling Process**
+## Future Improvements
 
-### **1. Data Preprocessing**
-
-The DNS dataset provides partial flow domain data, which required preprocessing through **mirroring** and **cubic spline interpolation** to complete the domain. This process is critical for enhancing the training dataset's coverage and ensuring consistency with DNS data.
-
-<p align="center">
-  <img src="./Images/Figure2.png" alt="Preprocessing Comparison of RANS and DNS Data" />
-</p>
-
-### **2. Governing Equation Discovery Using PySINDy**
-
-The **SINDy** approach was applied to discover governing equations for turbulent flow prediction. This process led to simplified and accurate equations for both the **x-momentum** and **y-momentum** components.
-
-#### Example x-momentum equation:
-
-\`\`\`python
-momentum_x = -dP/dx - ρ * duv/dy + ν * d²U/dy²
-\`\`\`
-
-The identified equations were then embedded into the **PINN** model to enforce physical constraints during training.
-
-### **3. Physics-Informed Neural Network (PINN)**
-
-The **PINN** architecture integrates physics-based constraints into a neural network model. The loss function includes **mean square error**.
-
-<p align="center">
-  <img src="./Images/Figure10.png" alt="PINN Model Architecture" />
-</p>
-
-The model learns to predict Reynolds stresses, ensuring that the output satisfies both **boundary conditions** and **momentum conservation**.
-
-### **4. Results Comparison**
-
-The results from the **PINN** model were compared against traditional **RANS** and **DNS** data, with significant improvements in prediction accuracy.
-
-<p align="center">
-  <img src="./Images/Figure12.png" alt="Comparison of Results" />
-</p>
+- Real-time IoT integration
+- Machine learning-based energy prediction
+- Cloud deployment
+- User authentication system
+- Advanced dashboards and analytics
+- Real-time monitoring
 
 ---
 
-## **Key Results**
+## Author
 
-| Model Type   | RMSE Improvement (%) |
-|--------------|----------------------|
-| **Channel**  | 81.29%               |
-| **Couette**  | 90.3%                |
+Ahmed El Karkouri  
+Data Science Engineering Student at INSEA
 
-<p align="center">
-  <img src="./Images/Figure13.png" alt="RMSE for Channel Flow" />
-</p>
-
-<p align="center">
-  <img src="./Images/Figure14.png" alt="RMSE for Couette Flow" />
-</p>
-
----
-
-## **How to Run the Project**
-
-1. Clone the repository:
-
-   \`\`\`bash
-   git clone https://github.com/Yass123krk/Portfolio.git
-   cd Portfolio/Projects/Leveraging_NN_ML_for_RANS_Model_Discovery
-   \`\`\`
-
-2. Install the required Python packages:
-
-   \`\`\`bash
-   pip install -r requirements.txt
-   \`\`\`
-
-3. Run the Jupyter Notebook for data preprocessing:
-
-   \`\`\`bash
-   jupyter notebook Neural_Networks_Codes/PINN/Data_Preprocessing.ipynb
-   \`\`\`
-
-4. Train the PINN model:
-
-   \`\`\`bash
-   python Neural_Networks_Codes/PINN/train_PINN.py
-   \`\`\`
-
-5. View results and compare RANS and DNS:
-
-   \`\`\`bash
-   python Neural_Networks_Codes/PINN/compare_results.py
-   \`\`\`
-
----
-
-## **Contact Information**
-
-For any inquiries or suggestions, feel free to contact me at [your-email@example.com].
-
----
-
-## **References**
-
-1. M. Lee, R.D. Moser, "Direct numerical simulation of turbulent channel flow up to Re 5200", *Journal of Fluid Mechanics*, 774, 2015.
-2. S. L. Brunton, J. L. Proctor, J. N. Kutz, "Discovering governing equations from data by sparse identification", *Proceedings of the National Academy of Sciences*, 2016.
-
+GitHub: https://github.com/ahmedelk77
